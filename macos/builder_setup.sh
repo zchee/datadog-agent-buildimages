@@ -17,13 +17,13 @@
 # 2. Update here the version of the formula to use.
 export PKG_CONFIG_VERSION=0.29.2
 export RUBY_VERSION=2.4.10
-export PYTHON_VERSION=3.8.5
-export CMAKE_VERSION=3.18.2
+export PYTHON_VERSION=3.8
+# export CMAKE_VERSION=3.18.2
 export GIMME_VERSION=1.5.4
 
 export BUNDLER_VERSION=2.1.4
 
-export GO_VERSION=1.15.11
+export GO_VERSION=1.15.11  # TODO(zchee): 1.16.5
 export IBM_MQ_VERSION=9.2.0.0
 
 # Install or upgrade brew (will also install Command Line Tools)
@@ -54,13 +54,13 @@ echo 'export PATH="/usr/local/opt/ruby@'$RUBY_VERSION'/bin:/usr/local/lib/ruby/g
 # Install bundler
 gem install bundler -v $BUNDLER_VERSION -f
 
+brew unlink pkg-config@$PKG_CONFIG_VERSION
+
 # Install python
-brew install DataDog/datadog-agent-macos-build/python@$PYTHON_VERSION -f
-brew link --overwrite python@$PYTHON_VERSION
+brew install python@$PYTHON_VERSION -f
 
 # Install cmake (depends on python@3.8)
-brew install DataDog/datadog-agent-macos-build/cmake@$CMAKE_VERSION -f
-brew link --overwrite cmake@$CMAKE_VERSION
+brew install cmake -f
 
 mkdir -p $HOME/go
 export GOPATH=$HOME/go
@@ -79,3 +79,6 @@ sudo mkdir -p /opt/mqm
 curl "https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqdev/mactoolkit/${IBM_MQ_VERSION}-IBM-MQ-Toolkit-MacX64.tar.gz" -o /tmp/mq_client.tar.gz
 sudo tar -C /opt/mqm -xf /tmp/mq_client.tar.gz
 sudo rm -rf /tmp/mq_client.tar.gz
+
+brew unlink pkg-config
+brew link pkg-config@$PKG_CONFIG_VERSION
