@@ -29,7 +29,7 @@ git pull
 git checkout "$VERSION"
 
 # Install python deps (invoke, etc.)
-python3 -m pip install -r requirements.txt
+/usr/local/opt/python@3.8/bin/python3 -m pip install -r requirements.txt
 
 # Clean up previous builds
 sudo rm -rf /opt/datadog-agent ./vendor ./vendor-new /var/cache/omnibus/src/* ./omnibus/Gemfile.lock
