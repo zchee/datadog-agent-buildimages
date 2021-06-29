@@ -37,7 +37,7 @@ sudo rm -rf /opt/datadog-agent ./vendor ./vendor-new /var/cache/omnibus/src/* ./
 # Create target folders
 sudo mkdir -p /opt/datadog-agent /var/cache/omnibus && sudo chown "$USER" /opt/datadog-agent /var/cache/omnibus
 
-gsed -i -E 's|"CGO_CFLAGS" => "(-I#\{install_dir\}/embedded/include)"|"CGO_CFLAGS" => "\1 -Wno-undef-prefix -Wno-implicit-function-declaration"|' omnibus/config/software/datadog-agent.rb
+gsed -i -E 's|"CGO_CFLAGS" => "(-I#\{install_dir\}/embedded/include)"|"CGO_CFLAGS" => "\1 -Wno-undef-prefix -Wno-implicit-function-declaration -Wno-implicit-function-declaration -Wno-dangling-else -Wno-pointer-sign -Wno-implicit-function-declaration"|' omnibus/config/software/datadog-agent.rb
 
 # Launch omnibus build
 if [ "$SIGN" = "true" ]; then
